@@ -1,0 +1,60 @@
+[
+    {
+        "id": 1,
+        "titulo": "Primeros pasos con Python",
+        "contenido": "video tutorial",
+        "autor": {
+            "nombre": "Julian Riniti",
+            "bio": "Estudiante de Python"
+        },
+        "tags": [
+            "Python",
+            "Principiantes"
+        ],
+        "estado": "publicado"
+    },
+    {
+        "id": 2,
+        "titulo": "Qué es Django",
+        "contenido": "manuales de estudio",
+        "autor": {
+            "nombre": "Julian Riniti",
+            "bio": "Estudiante de Python"
+        },
+        "tags": [
+            "Python",
+            "Django",
+            "Web"
+        ],
+        "estado": "borrador"
+    },
+    {
+        "id": 3,
+        "titulo": "Organizando datos con diccionarios",
+        "contenido": "organizador de datos",
+        "autor": {
+            "nombre": "Julian Riniti",
+            "bio": "Estudiante de Python"
+        },
+        "tags": [
+            "Python",
+            "Diccionarios"
+        ],
+        "estado": "archivado"
+    },
+    {
+        "id": "Probando blog",
+        "titulo": "Probando el blog",
+        "contenido": "Codigo nuevo",
+        "autor": {
+            "nombre": "Julian",
+            "bio": "Estudiante de Python"
+        },
+        "tags": [
+            "Estudiante",
+            "Primer blog",
+            "tarea ok"
+        ],
+        "estado": "publicado"
+    }
+]

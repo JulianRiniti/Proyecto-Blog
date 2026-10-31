@@ -1,45 +1,30 @@
-perfil_autor = {
-    "nombre": "Julian Riniti",
-    "bio": "Estudiante de Python",
-    "especialidad": "Numeros y estadisticas",
-    "redes sociales": ["@julianriniti", "@julianmatiasriniti"]
-}
+import json
+import os
+from blog.modelos import Post
 
-estados_post = ("borrador", "publicado", "archivado")
+RUTA_JSON = "posts.json"
 
-etiquetas_blog = {"Python", "Django", "Web", "Backend"}
+def cargar_posts():
+    """Carga los posts desde el archivo JSON y los convierte en objetos Post."""
+    if not os.path.exists(RUTA_JSON):
+        return []
+    
+    try:
+        with open(RUTA_JSON, "r", encoding="utf-8") as archivo:
+            contenido = archivo.read()
+            if not contenido.strip():
+                return []
+            datos = json.loads(contenido)
+            return [Post.desde_diccionario(p) for p in datos]
+    except (json.JSONDecodeError, Exception) as e:
+        print(f"Aviso: No se pudo leer el archivo de datos correctamente ({e}). Se iniciará vacío.")
+        return []
 
-posts = [
-    {
-        "id": 1,
-        "titulo": "Primeros pasos con Python",
-        "contenido": "video tutorial",
-        "autor": perfil_autor,
-        "tags": ["Python", "Principiantes"],
-        "estado": "publicado"
-    },
-    {
-        "id": 2,
-        "titulo": "Qué es Django",
-        "contenido": "manuales de estudio",
-        "autor": perfil_autor,
-        "tags": ["Python", "Django", "Web"],
-        "estado": "borrador"
-    },
-    {
-        "id": 3,
-        "titulo": "Organizando datos con diccionarios",
-        "contenido": "organizador de datos",
-        "autor": perfil_autor,
-        "tags": ["Python", "Diccionarios"],
-        "estado": "archivado"
-    },
-    {
-        "id": 4,
-        "titulo": "",  # ERROR: Título vacío intencional
-        # FALTA la clave "contenido" intencionalmente
-        "autor": "Julian Riniti",  # ERROR: Autor como texto en vez de diccionario
-        "tags": "Python",  # ERROR: Tags debería ser una lista y es string
-        "estado": "invalido"  # ERROR: Estado que no pertenece a la tupla
-    }
-]
+def guardar_posts(posts):
+    """Recibe la lista de objetos Post, los pasa a diccionarios y los guarda en JSON."""
+    try:
+        datos = [p.a_diccionario() for p in posts]
+        with open(RUTA_JSON, "w", encoding="utf-8") as archivo:
+            json.dump(datos, archivo, indent=4, ensure_ascii=False)
+    except Exception as e:
+        print(f"Error al intentar guardar los posts: {e}")
